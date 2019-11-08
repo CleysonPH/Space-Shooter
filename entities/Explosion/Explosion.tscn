@@ -1,0 +1,32 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://resources/explosion/tile000.png" type="Texture" id=1]
+[ext_resource path="res://resources/explosion/tile001.png" type="Texture" id=2]
+[ext_resource path="res://resources/explosion/tile002.png" type="Texture" id=3]
+[ext_resource path="res://resources/explosion/tile003.png" type="Texture" id=4]
+[ext_resource path="res://resources/explosion/tile004.png" type="Texture" id=5]
+[ext_resource path="res://resources/explosion/tile005.png" type="Texture" id=6]
+[ext_resource path="res://resources/explosion/tile006.png" type="Texture" id=7]
+[ext_resource path="res://resources/explosion/tile007.png" type="Texture" id=8]
+[ext_resource path="res://entities/Explosion/Explosion.gd" type="Script" id=9]
+[ext_resource path="res://resources/sounds/explosion.wav" type="AudioStream" id=10]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "explosion",
+"speed": 10.0
+} ]
+
+[node name="Explosion" type="AnimatedSprite"]
+z_index = 1
+z_as_relative = false
+frames = SubResource( 1 )
+animation = "explosion"
+playing = true
+script = ExtResource( 9 )
+
+[node name="SoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 10 )
+autoplay = true

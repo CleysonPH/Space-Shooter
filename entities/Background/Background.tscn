@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/background/background.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Stars"
+length = 3.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Stars:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 480 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Stars2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -480 ), Vector2( 0, 0 ) ]
+}
+
+[node name="Background" type="Node2D"]
+
+[node name="Stars" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Stars2" type="Sprite" parent="."]
+position = Vector2( 0, -480 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+autoplay = "Stars"
+anims/Stars = SubResource( 1 )

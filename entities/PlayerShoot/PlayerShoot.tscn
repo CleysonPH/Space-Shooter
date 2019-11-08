@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://entities/PlayerShoot/PlayerShoot.gd" type="Script" id=1]
+[ext_resource path="res://resources/shoots/player_shoot.png" type="Texture" id=2]
+[ext_resource path="res://resources/sounds/player_shot.wav" type="AudioStream" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 8.5 )
+
+[node name="PlayerShot" type="Area2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="SoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -10.0
+autoplay = true
+[connection signal="area_entered" from="." to="." method="_on_PlayerShoot_area_entered"]

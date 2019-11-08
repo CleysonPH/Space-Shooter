@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://resources/ships/player.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19, 17 )
+
+[node name="Player" type="Area2D"]
+position = Vector2( 160, 420 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Cannons" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="Left" type="Position2D" parent="Cannons"]
+position = Vector2( -12, -12 )
+
+[node name="Right" type="Position2D" parent="Cannons"]
+position = Vector2( 12, -12 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
