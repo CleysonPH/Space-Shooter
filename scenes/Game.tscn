@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entities/Background/Background.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/Player/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://entities/Camera/Camera.gd" type="Script" id=4]
 [ext_resource path="res://resources/sounds/music.ogg" type="AudioStream" id=5]
 [ext_resource path="res://resources/HUD/lifes.png" type="Texture" id=6]
+[ext_resource path="res://resources/HUD/button_normal.png" type="Texture" id=7]
+[ext_resource path="res://resources/HUD/button_pressed.png" type="Texture" id=8]
+[ext_resource path="res://resources/HUD/button_hover.png" type="Texture" id=9]
+[ext_resource path="res://resources/fonts/m5x7.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Sprite
@@ -17,6 +21,24 @@ func _ready():
 func _on_Player_armor_changed(armor):
 	set_frame(armor)
 "
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends TextureButton
+
+func _ready():
+	pass
+
+
+func _on_BtnStart_pressed():
+	get_tree().change_scene(\"res://scenes/MainMenu.tscn\")
+
+
+func _on_Player_tree_exited():
+	visible = true
+"
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 10 )
 
 [node name="Game" type="Node2D"]
 
@@ -45,4 +67,24 @@ offset = Vector2( 10, 10 )
 hframes = 5
 frame = 4
 script = SubResource( 1 )
+
+[node name="BtnStart" type="TextureButton" parent="HUD"]
+visible = false
+margin_left = 140.0
+margin_top = 200.0
+margin_right = 187.0
+margin_bottom = 216.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 8 )
+texture_hover = ExtResource( 9 )
+script = SubResource( 3 )
+
+[node name="Label" type="Label" parent="HUD/BtnStart"]
+margin_right = 47.0
+margin_bottom = 16.0
+custom_fonts/font = SubResource( 2 )
+text = "Menu"
+align = 1
 [connection signal="armor_changed" from="Player" to="HUD/Armor" method="_on_Player_armor_changed"]
+[connection signal="tree_exited" from="Player" to="HUD/BtnStart" method="_on_Player_tree_exited"]
+[connection signal="pressed" from="HUD/BtnStart" to="HUD/BtnStart" method="_on_BtnStart_pressed"]
