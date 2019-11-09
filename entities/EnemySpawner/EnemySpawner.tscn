@@ -4,8 +4,6 @@
 
 [node name="EnemySpawner" type="Node2D"]
 script = ExtResource( 1 )
-min_time = 2
-max_time = 3.0
 
 [node name="Container" type="Node2D" parent="."]
 
